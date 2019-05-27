@@ -18,14 +18,18 @@ int computeXOR(int n)
 logic
 
 
- Well, in runs of 4 (starting at a multiple of 4), all the bits except the lowest are the same, so they alternate between canceling each other or having their original value. It's true that the lowest bit cycles every 2, but 0^1 == 1 (i.e. they don't cancel). The reason the lowest two is special is because (00 ^ 01 ^ 10 ^ 11) == 00. In other words, every 4 values you cycle through gets you back to 0, and so you can cancel out all such cycles, which is why a%4 is significant.
+ Well, in runs of 4 (starting at a multiple of 4), all the bits except the lowest are the same, so they alternate between canceling each
+ other or having their original value. It's true that the lowest bit cycles every 2, but 0^1 == 1 (i.e. they don't cancel). 
+ The reason the lowest two is special is because (00 ^ 01 ^ 10 ^ 11) == 00. In other words, every 4 values you cycle through gets you
+ back to 0, and so you can cancel out all such cycles, which is why a%4 is significant.
  
  
  
  XOR from a to b
  
  
- Now, consider for a general range of [a,b]. We can use f() to find the XOR for [0,a-1] and [0,b]. Since any value XOR'd with itself is zero, the f(a-1) just cancels out all the values in the XOR run less than a, leaving you with the XOR of the range [a,b].
+ Now, consider for a general range of [a,b]. We can use f() to find the XOR for [0,a-1] and [0,b]. Since any value XOR'd with itself is
+ zero, the f(a-1) just cancels out all the values in the XOR run less than a, leaving you with the XOR of the range [a,b].
  
  Further Info
  
@@ -68,6 +72,7 @@ n      = f(b) ^ f(a-1)
 If you've been thinking of XOR like an add, you would've dropped in a subtract there. XOR is to XOR what add is to subtract!
 
 How do I come up with this myself?
-Remember the properties of logical operators. Work with them almost like an add or multiply if it helps. It feels unusual that and (&), xor (^) and or (|) are associative, but they are!
+Remember the properties of logical operators. Work with them almost like an add or multiply if it helps. It feels unusual that 
+and (&), xor (^) and or (|) are associative, but they are!
 
 Run the naive implementation through first, look for patterns in the output, then start finding rules which confirm the pattern is true. Simplify your implementation even further and repeat. This is probably the route that the original creator took, highlighted by the fact that it's not completely optimal (i.e. use a switch statement rather than an array).
